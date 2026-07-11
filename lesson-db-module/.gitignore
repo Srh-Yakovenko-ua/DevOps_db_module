@@ -1,0 +1,29 @@
+# Local .terraform directories
+**/.terraform/*
+
+# The provider lockfile IS committed on purpose (pins provider versions).
+
+# State files must never be committed
+*.tfstate
+*.tfstate.*
+
+# Crash logs
+crash.log
+crash.*.log
+
+# Variable files that may hold secrets (passwords, etc.)
+*.tfvars
+*.tfvars.json
+
+# Override files
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Plan output
+*.tfplan
+
+# CLI config
+.terraformrc
+terraform.rc
