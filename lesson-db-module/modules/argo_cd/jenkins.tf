@@ -2,6 +2,11 @@
 # chart that declares the Dealsbe Application. Once installed, Argo CD watches
 # the Git repo and keeps the cluster in sync with charts/django-app - no manual
 # kubectl/helm after the first apply.
+#
+# File name: this file is named jenkins.tf to match the assignment's project
+# structure diagram (which lists modules/argo_cd/jenkins.tf). It contains the
+# Argo CD resources; Terraform loads every .tf file in the module regardless of
+# name, so the name is only there for structural parity.
 
 # Namespace for the Argo CD control plane.
 resource "kubernetes_namespace" "this" {
