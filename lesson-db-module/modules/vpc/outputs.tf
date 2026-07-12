@@ -24,6 +24,6 @@ output "internet_gateway_id" {
 }
 
 output "nat_gateway_id" {
-  description = "ID of the NAT Gateway (null when NAT is disabled)"
-  value       = one(aws_nat_gateway.this[*].id)
+  description = "ID of the NAT Gateway"
+  value       = aws_nat_gateway.this.id
 }

@@ -59,9 +59,8 @@ resource "aws_internet_gateway" "this" {
   }
 }
 
-# Elastic IP for the NAT Gateway. Created only when NAT is enabled.
+# Elastic IP for the NAT Gateway.
 resource "aws_eip" "nat" {
-  count  = var.enable_nat_gateway ? 1 : 0
   domain = "vpc"
 
   tags = {
@@ -73,12 +72,9 @@ resource "aws_eip" "nat" {
 
 # Single NAT Gateway placed in the first public subnet. It lets instances in
 # the private subnets reach the internet for outbound traffic only.
-# Databases do not need outbound internet, so this can be turned off
-# (enable_nat_gateway = false) to save cost. A production setup with workloads
-# in the private subnets would use one NAT Gateway per AZ for high availability.
+# A production setup would use one NAT Gateway per AZ for high availability.
 resource "aws_nat_gateway" "this" {
-  count         = var.enable_nat_gateway ? 1 : 0
-  allocation_id = aws_eip.nat[0].id
+  allocation_id = aws_eip.nat.id
   subnet_id     = aws_subnet.public[0].id
 
   tags = {

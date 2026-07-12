@@ -37,9 +37,3 @@ variable "cluster_name" {
   type        = string
   default     = ""
 }
-
-variable "enable_nat_gateway" {
-  description = "Create a NAT Gateway so the private subnets can reach the internet. Databases do not need it, so leave it off to save cost."
-  type        = bool
-  default     = true
-}

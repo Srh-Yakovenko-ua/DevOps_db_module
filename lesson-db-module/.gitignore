@@ -1,17 +1,17 @@
 # Local .terraform directories
 **/.terraform/*
 
-# The provider lockfile IS committed on purpose (pins provider versions).
+# Terraform lockfile is committed on purpose, everything else below is ignored.
 
 # State files must never be committed
 *.tfstate
 *.tfstate.*
 
-# Crash logs
+# Crash log files
 crash.log
 crash.*.log
 
-# Variable files that may hold secrets (passwords, etc.)
+# Variable files that may contain secrets
 *.tfvars
 *.tfvars.json
 
@@ -21,9 +21,23 @@ override.tf.json
 *_override.tf
 *_override.tf.json
 
-# Plan output
+# Plan output files
 *.tfplan
 
-# CLI config
+# CLI configuration files
 .terraformrc
 terraform.rc
+
+# Python / Django (app/)
+__pycache__/
+*.py[cod]
+*.sqlite3
+app/staticfiles/
+.env
+
+# Helm
+charts/**/charts/
+*.tgz
+
+# Local kubeconfig copies
+kubeconfig

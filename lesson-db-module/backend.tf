@@ -1,8 +1,10 @@
-# Remote state in S3 with a DynamoDB lock table.
+# Remote state stored in S3 with DynamoDB used for state locking.
 #
-# The bucket name is account specific (derived from the AWS account id), so it
-# is supplied at init time with -backend-config="bucket=..." which the Makefile
-# does automatically. Any account can deploy this without editing the code.
+# The bucket name is account specific (it is derived from the AWS account id),
+# so it is not hardcoded here. It is supplied at init time with
+# -backend-config="bucket=..." which `make bootstrap` and `make init` do
+# automatically. This keeps the project universal: any account can deploy it
+# without editing the code (see README.md).
 terraform {
   backend "s3" {
     key            = "lesson-db-module/terraform.tfstate"

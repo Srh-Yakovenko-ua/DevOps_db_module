@@ -19,18 +19,13 @@ resource "aws_route_table_association" "public" {
   route_table_id = aws_route_table.public.id
 }
 
-# Private route table. When NAT is enabled it sends internet-bound traffic
-# through the NAT Gateway; otherwise the private subnets stay fully isolated
-# (which is all a database needs).
+# Private route table: sends internet traffic through the NAT Gateway.
 resource "aws_route_table" "private" {
   vpc_id = aws_vpc.this.id
 
-  dynamic "route" {
-    for_each = var.enable_nat_gateway ? [1] : []
-    content {
-      cidr_block     = "0.0.0.0/0"
-      nat_gateway_id = aws_nat_gateway.this[0].id
-    }
+  route {
+    cidr_block     = "0.0.0.0/0"
+    nat_gateway_id = aws_nat_gateway.this.id
   }
 
   tags = {

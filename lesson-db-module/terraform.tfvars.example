@@ -1,0 +1,42 @@
+# Copy to terraform.tfvars and fill in. terraform.tfvars is gitignored.
+# Alternatively export these as TF_VAR_* environment variables.
+
+# REQUIRED. The Git repo that holds this project (Jenkinsfile, charts/, app/).
+# Jenkins pushes the image-tag bump here; Argo CD tracks it.
+git_repo_url = "https://github.com/Srh-Yakovenko-ua/DevOps_db_module.git"
+
+# Where this project lives inside that repo:
+#   "lesson-db-module" -> repo root is DevOps_db_module/, project is in the lesson-db-module/ subdir (default)
+#   ""                 -> the project IS the repo root
+repo_path_prefix = "lesson-db-module"
+
+# Branch the pipeline pushes to and Argo CD syncs from.
+gitops_branch = "main"
+
+# GitHub credentials the Jenkins pipeline uses to push the values bump.
+# Use a fine-grained PAT / classic token with "repo" (Contents: read/write) scope.
+# Prefer setting the token via the environment: export TF_VAR_github_token=ghp_xxx
+github_username = "Srh-Yakovenko-ua"
+github_token    = "" # set via TF_VAR_github_token, do NOT commit a real token
+
+# Set true only if the Git repo is private (Argo CD then gets a read credential).
+repo_private = false
+
+# --- Optional overrides (sensible defaults already set) ---------------------
+# aws_region             = "us-west-2"
+# jenkins_admin_password = ""   # empty = chart generates a random one
+# jenkins_service_type   = "LoadBalancer"
+# argocd_service_type    = "LoadBalancer"
+
+# --- Database module (this theme's deliverable) -----------------------------
+# The rds module builds a single RDS instance by default. Flip to Aurora, change
+# engine or size here; the module derives the parameter group family and port.
+# db_use_aurora            = false      # true -> Aurora cluster instead of a single instance
+# db_engine                = "postgres" # or "mysql"
+# db_engine_version        = "16"       # "8.0" for mysql
+# db_instance_class        = null       # null -> db.t3.micro (RDS) / db.t3.medium (Aurora)
+# db_name                  = "dealsbe"
+# db_username              = "dbadmin"
+# db_password              = null        # null -> module generates a random one (db_password output)
+# db_multi_az              = false       # plain RDS: standby in a second AZ
+# db_aurora_instance_count = 1           # Aurora: 1 writer, 2+ adds read replicas
