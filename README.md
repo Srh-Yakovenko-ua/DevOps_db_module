@@ -1,5 +1,11 @@
 # Flexible Terraform database module (RDS / Aurora)
 
+> **Where the project lives.** The full, ready to run project is in
+> [`lesson-db-module/`](lesson-db-module/) (submission branch: `lesson-db-module`).
+> This top-level file is a copy of that project's README, kept at the repository
+> root so it shows up on the GitHub landing page. All commands below are run from
+> inside `lesson-db-module/`.
+
 This theme's deliverable is a single, reusable Terraform module,
 **`modules/rds`**, that builds either a plain **RDS instance** or an **Aurora
 cluster**, decided by one flag: `use_aurora`. In both modes it also creates the
